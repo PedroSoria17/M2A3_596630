@@ -17,15 +17,46 @@
                 <span>WASD</span> moverse &nbsp;·&nbsp;
                 <span>RATÓN</span> mirar &nbsp;·&nbsp;
                 <span>E</span> interactuar &nbsp;·&nbsp;
-                <span>ESC</span> liberar puntero
+                <span>ESC</span> pausa
             </p>
             <button id="startBtn" type="button">Empezar</button>
+            <button id="menuSettingsBtn" type="button" class="secondary">Configuración</button>
         </div>
         <p class="credits">Hecho con Three.js · Pulsa Empezar para bloquear el cursor</p>
     </div>
 
-    <div id="loading" class="screen hidden">
-        <div class="loader-text">CARGANDO...</div>
+    <div id="settings" class="screen hidden">
+        <h2 class="panel-title">CONFIGURACIÓN</h2>
+        <div class="panel-body">
+            <div class="settings-section">
+                <h3>AUDIO</h3>
+                <label class="setting"><span>Volumen general</span><input type="range" id="vol-master" min="0" max="100" value="70"><span class="val" data-for="vol-master">70</span></label>
+                <label class="setting"><span>Efectos</span><input type="range" id="vol-sfx" min="0" max="100" value="100"><span class="val" data-for="vol-sfx">100</span></label>
+                <label class="setting"><span>Ambiente</span><input type="range" id="vol-ambient" min="0" max="100" value="80"><span class="val" data-for="vol-ambient">80</span></label>
+            </div>
+            <div class="settings-section">
+                <h3>VIDEO</h3>
+                <label class="setting"><span>Brillo</span><input type="range" id="brightness" min="40" max="200" value="100"><span class="val" data-for="brightness">100</span></label>
+                <label class="setting"><span>Campo de visión</span><input type="range" id="fov" min="60" max="100" value="78"><span class="val" data-for="fov">78</span></label>
+                <label class="setting"><span>Niebla</span><input type="range" id="fog" min="0" max="200" value="100"><span class="val" data-for="fog">100</span></label>
+            </div>
+            <div class="settings-section">
+                <h3>CONTROL</h3>
+                <label class="setting"><span>Sensibilidad ratón</span><input type="range" id="sensitivity" min="20" max="200" value="100"><span class="val" data-for="sensitivity">100</span></label>
+                <label class="setting toggle"><span>Sacudida de cámara</span><input type="checkbox" id="shake-toggle" checked></label>
+                <label class="setting toggle"><span>Linterna</span><input type="checkbox" id="flashlight-toggle" checked></label>
+            </div>
+        </div>
+        <button id="settings-back" type="button">Volver</button>
+    </div>
+
+    <div id="pause" class="screen hidden">
+        <h2 class="panel-title">PAUSA</h2>
+        <div class="pause-body">
+            <button id="resumeBtn" type="button">Continuar</button>
+            <button id="pauseSettingsBtn" type="button" class="secondary">Configuración</button>
+            <button id="quitBtn" type="button" class="secondary">Salir al menú</button>
+        </div>
     </div>
 
     <div id="game" class="hidden">

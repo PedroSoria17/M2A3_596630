@@ -58,12 +58,16 @@ canvas { display: block; }
     border: 1px solid rgba(120, 30, 30, 0.4);
     padding: 2rem;
     background: rgba(10, 5, 5, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .warning {
     color: #c44;
     font-size: 0.85rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     line-height: 1.4;
 }
 
@@ -71,7 +75,7 @@ canvas { display: block; }
     color: #a99989;
     font-size: 0.9rem;
     line-height: 2;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 .instructions span {
     background: #2a1010;
@@ -90,10 +94,22 @@ button {
     letter-spacing: 0.3rem;
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
+    min-width: 240px;
 }
 button:hover {
     background: #441010;
     color: #ffeeee;
+}
+button.secondary {
+    border-color: #5a3a3a;
+    color: #a89888;
+    font-size: 0.9rem;
+    letter-spacing: 0.2rem;
+    padding: 0.55rem 2rem;
+}
+button.secondary:hover {
+    background: #2a1010;
+    color: #d8c8b8;
 }
 
 .credits {
@@ -101,6 +117,117 @@ button:hover {
     color: #555;
     font-size: 0.75rem;
     letter-spacing: 0.2rem;
+}
+
+/* Panel de configuración / pausa */
+.panel-title {
+    font-size: 2.4rem;
+    letter-spacing: 0.8rem;
+    color: #d4c4b4;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 20px rgba(120, 0, 0, 0.4);
+    animation: flicker 6s infinite;
+}
+
+.panel-body {
+    width: min(620px, 92vw);
+    max-height: 70vh;
+    overflow-y: auto;
+    border: 1px solid rgba(120, 30, 30, 0.4);
+    background: rgba(10, 5, 5, 0.7);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.panel-body::-webkit-scrollbar { width: 6px; }
+.panel-body::-webkit-scrollbar-thumb { background: #5a2020; }
+
+.settings-section {
+    margin-bottom: 1.5rem;
+}
+.settings-section h3 {
+    color: #b85050;
+    font-size: 0.8rem;
+    letter-spacing: 0.4rem;
+    border-bottom: 1px solid #3a1010;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.setting {
+    display: grid;
+    grid-template-columns: 1fr 200px 50px;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.4rem 0;
+    color: #c8b8a8;
+    font-size: 0.85rem;
+    text-align: left;
+    cursor: pointer;
+}
+.setting > span:first-child { color: #b8a898; }
+.setting .val {
+    text-align: right;
+    color: #d8c8b8;
+    font-size: 0.8rem;
+}
+.setting.toggle {
+    grid-template-columns: 1fr auto;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #1a0a08;
+    height: 4px;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #c83030;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(200, 30, 30, 0.6);
+}
+input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: #c83030;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #884444;
+    background: #1a0a08;
+    cursor: pointer;
+    position: relative;
+}
+input[type="checkbox"]:checked::after {
+    content: "✕";
+    position: absolute;
+    inset: 0;
+    color: #d83030;
+    text-align: center;
+    line-height: 16px;
+    font-size: 14px;
+}
+
+.pause-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+    background: rgba(10, 5, 5, 0.7);
+    border: 1px solid rgba(120, 30, 30, 0.4);
+    padding: 2rem 2.5rem;
 }
 
 .loader-text {
@@ -124,7 +251,7 @@ button:hover {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    box-shadow: inset 0 0 240px 80px rgba(0, 0, 0, 0.95);
+    box-shadow: inset 0 0 220px 60px rgba(0, 0, 0, 0.92);
     z-index: 4;
 }
 
@@ -197,7 +324,7 @@ button:hover {
 #jumpscare {
     position: fixed;
     inset: 0;
-    background: #200;
+    background: #100000;
     z-index: 8;
     display: flex;
     align-items: center;
@@ -208,28 +335,33 @@ button:hover {
     position: absolute;
     inset: 0;
     background-image:
-        radial-gradient(ellipse at center, rgba(180, 0, 0, 0.6) 0%, rgba(0,0,0,0.95) 70%);
-    animation: shake 0.08s infinite;
+        radial-gradient(ellipse at center, rgba(180, 0, 0, 0.7) 0%, rgba(0,0,0,0.97) 75%);
+    animation: shake 0.06s infinite;
 }
 #jumpscare::after {
     content: "";
     position: absolute;
-    width: 60vmin;
-    height: 60vmin;
-    background-image: var(--lisa-face);
+    width: 70vmin;
+    height: 70vmin;
+    background-image: var(--demon-face);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    animation: shake 0.05s infinite;
-    filter: contrast(1.4);
+    animation: shake 0.04s infinite, pulse-scare 0.25s ease-out;
+    filter: contrast(1.5) saturate(1.4);
 }
 
 @keyframes shake {
     0%   { transform: translate(0, 0); }
-    25%  { transform: translate(-4px, 3px); }
-    50%  { transform: translate(5px, -2px); }
-    75%  { transform: translate(-3px, -4px); }
-    100% { transform: translate(2px, 4px); }
+    25%  { transform: translate(-5px, 4px); }
+    50%  { transform: translate(6px, -3px); }
+    75%  { transform: translate(-4px, -5px); }
+    100% { transform: translate(3px, 5px); }
+}
+
+@keyframes pulse-scare {
+    0% { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 .ending-title {
