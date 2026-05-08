@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pasillo — Un homenaje a P.T.</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="menu" class="screen">
+        <h1 class="title">EL&nbsp;PASILLO</h1>
+        <p class="subtitle">Un homenaje a P.T.</p>
+        <div class="menu-body">
+            <p class="warning">ADVERTENCIA: este juego contiene imágenes inquietantes,
+                sonidos perturbadores y luces parpadeantes. Usa auriculares para una experiencia completa.</p>
+            <p class="instructions">
+                <span>WASD</span> moverse &nbsp;·&nbsp;
+                <span>RATÓN</span> mirar &nbsp;·&nbsp;
+                <span>E</span> interactuar &nbsp;·&nbsp;
+                <span>ESC</span> liberar puntero
+            </p>
+            <button id="startBtn" type="button">Empezar</button>
+        </div>
+        <p class="credits">Hecho con Three.js · Pulsa Empezar para bloquear el cursor</p>
+    </div>
+
+    <div id="loading" class="screen hidden">
+        <div class="loader-text">CARGANDO...</div>
+    </div>
+
+    <div id="game" class="hidden">
+        <div id="vignette"></div>
+        <div id="static"></div>
+        <div id="crosshair">·</div>
+        <div id="subtitles"></div>
+        <div id="hint"></div>
+        <div id="loopCounter"></div>
+        <div id="jumpscare" class="hidden"></div>
+    </div>
+
+    <div id="ending" class="screen hidden">
+        <h2 class="ending-title">¿LIBRE?</h2>
+        <p class="ending-text" id="endingText"></p>
+        <button id="restartBtn" type="button">Volver al pasillo</button>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module" src="game.js"></script>
+</body>
+</html>
